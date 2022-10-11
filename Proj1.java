@@ -1,7 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.security.Permission;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -9,25 +7,30 @@ public class Proj1 {
     private final String CITY_DAT = "city.dat";
     private final String EDGE_DAT = "edge.dat";
 
-    private HashMap<String, City> citiesMap;
+    private final HashMap<String, City> citiesMap;
 
-    public Proj1 () {
+    private final HashMap<City, Double> distToGoal;
+
+    private final City goal;
+
+    public Proj1 (String start, String end) {
         Scanner cities = null;
         Scanner edges = null;
         citiesMap = new HashMap<>();
+        distToGoal = new HashMap<>();
 
         try {
             cities = new Scanner(new File(CITY_DAT));
         } catch (FileNotFoundException ignored) {
-            System.out.println("File not found: city.dat");
-            System.exit(1);
+            System.err.println("File not found: city.dat");
+            System.exit(0);
         }
 
         try {
             edges = new Scanner(new File(EDGE_DAT));
         } catch (FileNotFoundException ignored) {
-            System.out.println("File not found: edge.dat");
-            System.exit(2);
+            System.err.println("File not found: edge.dat");
+            System.exit(0);
         }
 
         while (cities.hasNextLine()) {
@@ -39,6 +42,14 @@ public class Proj1 {
             String[] line = edges.nextLine().strip().split("[\t| ]+");
             citiesMap.get(line[0]).addNeighbor(citiesMap.get(line[1]));
         }
+
+        goal = citiesMap.get(end);
+
+        for(City c : citiesMap.values()) {
+            distToGoal.put(c, c.distToCity(goal));
+        }
+
+        System.out.println(distToGoal);
 
     }
 
@@ -52,6 +63,39 @@ public class Proj1 {
     }
 
     public static void main(String[] args) {
-        new Proj1();
+        Scanner in = new Scanner(System.in);
+
+        if (args.length != 2) {
+            System.err.println("Usage: java Search inputFile outputFile");
+            System.exit(0);
+        }
+
+        String start;
+        String end;
+
+        if (args[0].equals("-")){
+            System.out.println("Please input a starting city:");
+            start = in.nextLine().strip();
+            System.out.println("Please input an ending city:");
+            end = in.nextLine().strip();
+        } else {
+            Scanner route = null;
+            try {
+                route = new Scanner(new File(args[0]));
+            } catch (FileNotFoundException ignored) {
+                System.err.println("File not found: " + args[0]);
+                System.exit(0);
+            }
+            start = route.nextLine().strip();
+            end = route.nextLine().strip();
+        }
+
+
+
+        if (end.equals("-")){
+
+        }
+
+        new Proj1(start, end);
     }
 }
