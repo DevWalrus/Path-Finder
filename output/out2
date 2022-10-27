@@ -1,5 +1,5 @@
 
-Breadth-First Search Results: 
+Breadth-First src.main.java.Search Results:
 Denver
 Topeka
 JeffersonCity
@@ -13,7 +13,7 @@ That took 8 hops to find.
 Total distance = 3832 miles.
 
 
-Depth-First Search Results: 
+Depth-First src.main.java.Search Results:
 Denver
 Lincoln
 DesMoines
@@ -30,7 +30,7 @@ That took 11 hops to find.
 Total distance = 4419 miles.
 
 
-A* Search Results: 
+A* src.main.java.Search Results:
 Denver
 Topeka
 JeffersonCity

@@ -1,5 +1,5 @@
 
-Breadth-First Search Results: 
+Breadth-First src.main.java.Search Results:
 Olympia
 Boise
 SaltLakeCity
@@ -7,7 +7,7 @@ That took 2 hops to find.
 Total distance = 1264 miles.
 
 
-Depth-First Search Results: 
+Depth-First src.main.java.Search Results:
 Olympia
 Boise
 SaltLakeCity
@@ -15,7 +15,7 @@ That took 2 hops to find.
 Total distance = 1264 miles.
 
 
-A* Search Results: 
+A* src.main.java.Search Results:
 Olympia
 Boise
 SaltLakeCity
